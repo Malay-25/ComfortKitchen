@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react
 import RecipeList from './RecipeList';
 import AddRecipeForm from './AddRecipeForm';
 import axios from 'axios';
+import RecipeDetail from './RecipeDetail';
 
 function AppWrapper() {
   return (
@@ -36,7 +37,7 @@ function App() {
   return (
     <div className='container'>
       <nav className="navbar navbar-expand-lg navbar-light bg-light my-3">
-        <Link className="navbar-brand" to="/">CookBook</Link>
+        <Link className="navbar-brand" to="/">PantryPal</Link>
         <div className="navbar-nav">
           <Link className="nav-link" to="/">Home</Link>
           <Link className="nav-link" to="/add">Add Recipe</Link>
@@ -57,11 +58,13 @@ function App() {
           path="/add"
           element={
             <AddRecipeForm
-              oneRecipeAdded={() => {
-                fetchRecipes();
-              }}
+              oneRecipeAdded={fetchRecipes}
             />
           }
+        />
+        <Route
+          path="/recipes/:id"
+          element={<RecipeDetail />}
         />
       </Routes>
     </div>

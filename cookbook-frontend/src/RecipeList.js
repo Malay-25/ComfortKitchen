@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function RecipeList({ recipes, onEdit }) {
     const [searchTerm, setSearchTerm] = useState('');
-    const [visibleInstructions, setVisibleInstructions] = useState({});
+    const navigate = useNavigate();
 
     const handleDelete = async (id) => {
         if (window.confirm("Are you sure you want to delete this recipe?")) {
@@ -17,24 +18,10 @@ function RecipeList({ recipes, onEdit }) {
         }
     };
 
-    const toggleInstructions = (id) => {
-        setVisibleInstructions(prev => ({
-            ...prev,
-            [id]: !prev[id]
-        }));
-    };
-
     const filteredRecipes = recipes.filter(recipe =>
-        recipe.title.toLowerCase().includes(searchTerm.toLowerCase())
+        recipe.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (recipe.tags && recipe.tags.toLowerCase().includes(searchTerm.toLowerCase()))
     );
-
-    const formatInstructions = (text) => {
-        return text
-            .split(/\r?\n/)
-            .map(step => step.replace(/^[-•\d.]+\s*/, '').trim())  // remove 1., -, etc.
-            .filter(step => step.length > 0)
-            .map((step, index) => <li key={index}>{step}</li>);
-    };
 
     return (
         <div className='container mt-4'>
@@ -43,7 +30,7 @@ function RecipeList({ recipes, onEdit }) {
             <input
                 type="text"
                 className="form-control mb-4"
-                placeholder="Search recipes..."
+                placeholder="Search recipes by title or tag..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -52,47 +39,35 @@ function RecipeList({ recipes, onEdit }) {
                 {filteredRecipes.length > 0 ? (
                     filteredRecipes.map(recipe => (
                         <div className='col-md-4 mb-4' key={recipe.id}>
-                            <div className='card h-100 d-flex flex-column'>
-                                {recipe.image && (
-                                    <img
-                                        src={recipe.image}
-                                        className='card-img-top'
-                                        alt={recipe.title}
-                                        style={{ height: '300px', objectFit: 'cover' }} // increased image size
-                                    />
-                                )}
+                            <div className='card h-100 shadow-sm'>
+                                <div
+                                    style={{ cursor: 'pointer' }}
+                                    onClick={() => navigate(`/recipes/${recipe.id}`)}
+                                >
+                                    {recipe.image && (
+                                        <img
+                                            src={recipe.image}
+                                            className='card-img-top'
+                                            alt={recipe.title}
+                                            style={{ height: '250px', objectFit: 'cover' }}
+                                        />
+                                    )}
+                                </div>
                                 <div className='card-body d-flex flex-column'>
-                                    <h5 className='card-title'>{recipe.title}</h5>
-
+                                    <h5
+                                        className='card-title'
+                                        style={{ cursor: 'pointer' }}
+                                        onClick={() => navigate(`/recipes/${recipe.id}`)}
+                                    >
+                                        {recipe.title}
+                                    </h5>
                                     {recipe.tags && (
-                                        <p className="card-text mb-2">
+                                        <p className="card-text text-muted mb-2">
                                             <strong>Tags:</strong> {recipe.tags}
                                         </p>
                                     )}
-
-                                    <button
-                                        className='btn btn-outline-secondary btn-sm mb-2'
-                                        onClick={() => toggleInstructions(recipe.id)}
-                                    >
-                                        {visibleInstructions[recipe.id] ? 'Hide Instructions' : 'Show Instructions'}
-                                    </button>
-
-                                    {visibleInstructions[recipe.id] && (
-                                        <ul
-                                            className='card-text mb-3'
-                                            style={{
-                                                fontSize: '0.95rem',
-                                                lineHeight: '1.5',
-                                                paddingLeft: '1rem',
-                                                color: '#333',
-                                            }}
-                                        >
-                                            {formatInstructions(recipe.instructions)}
-                                        </ul>
-                                    )}
-
-                                    <div className="mt-auto d-flex justify-content-between">
-                                        <button className='btn btn-primary btn-sm' onClick={() => onEdit(recipe)}>
+                                    <div className="mt-auto">
+                                        <button className='btn btn-primary btn-sm me-2' onClick={() => onEdit(recipe)}>
                                             Edit
                                         </button>
                                         <button className='btn btn-danger btn-sm' onClick={() => handleDelete(recipe.id)}>

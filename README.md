@@ -98,11 +98,10 @@ npm start
 ### Home Page
 <img width="1608" height="3478" alt="Home_Page" src="https://github.com/user-attachments/assets/c66e334f-ec7b-4dcf-9c78-2d11f159fad7" />
 
-
-## Recipe Detail Page
+### Recipe Detail Page
 <img width="1608" height="3166" alt="Recipe_Detail_Page" src="https://github.com/user-attachments/assets/cee2714c-659d-44a6-891c-b3a3eb9c2f96" />
 
-## Add Recipe Page
+### Add Recipe Page
 <img width="1640" height="2360" alt="Add_Recipe_Page" src="https://github.com/user-attachments/assets/4beb6529-078e-4d17-9959-3e0d6895b0ee" />
 
 ---

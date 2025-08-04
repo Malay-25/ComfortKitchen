@@ -85,8 +85,12 @@ function AddRecipeForm({ oneRecipeAdded }) {
                         className="form-control"
                         value={ingredients}
                         onChange={(e) => setIngredients(e.target.value)}
+                        placeholder="Enter one ingredient per line"
                         required
                     />
+                    <small className="text-muted">
+                        Example: Use Enter/Return to separate each step onto a new line.
+                    </small>
                 </div>
                 <div className="mb-3">
                     <label className="form-label">Instructions:</label>

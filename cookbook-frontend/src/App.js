@@ -4,6 +4,7 @@ import RecipeList from './RecipeList';
 import AddRecipeForm from './AddRecipeForm';
 import axios from 'axios';
 import RecipeDetail from './RecipeDetail';
+import './custom.css'
 
 function AppWrapper() {
   return (
@@ -35,14 +36,24 @@ function App() {
   };
 
   return (
-    <div className='container'>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light my-3">
-        <Link className="navbar-brand" to="/">PantryPal</Link>
-        <div className="navbar-nav">
-          <Link className="nav-link" to="/">Home</Link>
-          <Link className="nav-link" to="/add">Add Recipe</Link>
-        </div>
-      </nav>
+    <div className="container text-center">
+      <img
+        src="ComfortKitchen.png"
+        alt="Comfort Kitchen Logo"
+        style={{ height: '200px', marginTop: '3px'}}
+      />
+
+      <div style={{
+        //backgroundColor: '#FFE0CC',
+        //padding: '10px 0',
+        borderRadius: '10px',
+        fontWeight: '600',
+        fontSize: '1.1rem',
+        marginBottom: '20px'
+      }}>
+        <Link to="/" style={{ margin: '0 20px', color: '#3B2F2F', textDecoration: 'none' }}>Home</Link>
+        <Link to="/add" style={{ margin: '0 20px', color: '#3B2F2F', textDecoration: 'none' }}>Add Recipe</Link>
+      </div>
 
       <Routes>
         <Route

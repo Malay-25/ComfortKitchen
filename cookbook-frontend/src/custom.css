@@ -1,0 +1,66 @@
+body {
+  background-color: #FFF8F0;
+  background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+}
+
+
+.navbar {
+  background-color: #FFD9C0 !important;
+  border-radius: 8px;
+}
+
+.navbar-brand, .nav-link {
+  font-weight: bold;
+  color: #5E454B !important;
+}
+
+.card {
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  background-color: #efd4d4;
+  transition: transform 0.2s ease-in-out;
+  min-height: 250px;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-img-top {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  object-fit: cover;
+  height: 250px;
+}
+
+.btn {
+  border-radius: 20px;
+}
+
+.btn-primary {
+  background-color: #FF968A;
+  border-color: #FF968A;
+}
+
+.btn-primary:hover {
+  background-color: #FF6B6B;
+  border-color: #FF6B6B;
+}
+
+.btn-danger {
+  background-color: #A44A3F;
+  border-color: #A44A3F;
+}
+
+input.form-control {
+  border-radius: 10px;
+}
+
+.card-title {
+  color: #2F2F2F;
+}
+
+.card-text {
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
